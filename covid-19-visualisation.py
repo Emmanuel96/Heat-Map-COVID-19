@@ -21,16 +21,16 @@ xls = pd.ExcelFile('OXCGRT_summary.xlsx')
 
 confirmed_cases_data = pd.read_excel(xls, 0)
 confirmed_cases_data = confirmed_cases_data[:-1]
-# --------------- BEGINNING OF QUESTION 4 ----------------------
+
 # iterate from 2nd march to 10th May
 # get the countries for our y axis label
 countries = confirmed_cases_data['CountryCode']
-# drop the country name 
+# drop the country name
 data = confirmed_cases_data.drop(['CountryName'], axis=1)
 
 # next we melt our data
 data_melted = data.melt('CountryCode', var_name='dates', value_name="cases")
-# array of months 
+# array of months
 months = ['jan', 'feb', 'mar', 'apr', 'may']
 # we need to create our dataframe of weekly cases
 cols = ['CountryCode', 'Weeks', 'Cases']
@@ -38,7 +38,7 @@ weekly_cases = pd.DataFrame(columns=cols)
 # loop through each country and needed months
 endloop = False
 for country in countries:
-    # start with day 2 and month: index of 2 
+    # start with day 2 and month: index of 2
     day = 2
     month = 2  # i.e. march starting from 0
     week_count = 1
@@ -146,11 +146,10 @@ for (j,i), label in np.ndenumerate(weekly_cases_unmelted.values):
                                     color='k', fontsize=8))
 # set color bar
 cbar = ax.collections[0].colorbar
-cbar.set_ticks([0,0.5,1])
+# cbar.set_ticks([0,0.5,1])
 # cbar.set_location('top')
-cbar.set_ticklabels(['0','17.5k', '35k'])
+# cbar.set_ticklabels(['0','17.5k', '35k'])
 # # move x ticks and label to the top
 ax.xaxis.tick_top()
 ax.xaxis.set_label_position('top')
 plt.show()
-# --------------------- END OF QUESTION 4 -------------------------
